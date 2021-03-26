@@ -1,0 +1,72 @@
+git clone https://code.savvysherpa.com/infrafactory-gitops/layer2-appfactory-infra.git
+cd layer2-appfactory-infra/
+git checkout -b 23e9f83e-2fcb-4452-bef5-899a1da0a839
+cd bookstore/
+cd dev
+cp *.tf ../../automatedinfratest/dev/
+cd ../../automatedinfratest/dev
+cd dev
+vi providers.tf
+modify prefix to:
+         terraform {
+
+            backend "gcs" {
+            bucket  = "tf-state-layer2-appfactory-infra"
+            prefix  = "automatedinfratest/dev"
+git add .
+git status
+git commit -m "23e9f83e-2fcb-4452-bef5-899a1da0a839 added"
+git push origin 23e9f83e-2fcb-4452-bef5-899a1da0a839
+
+Then do pull request
+Wait for approvals
+Then to atlantis plan/apply
+Watch 
+
+-----Original Message-----
+From: noreply@savvysherpa.com <noreply@savvysherpa.com> 
+Sent: Thursday, March 25, 2021 7:42 AM
+To: Hudak, Thomas J <thomas.hudak@optum.com>
+Cc: Palacios, Manuel <manuel.palacios@uhg.com>; Ross, Gary L <gary.ross@uhg.com>; Rodeback, Ryan <ryan.rodeback@uhg.com>; Yellepeddi, Aditya <AdityaYellepeddi@UHG.Savvysherpa.com>; Arokiasamy, John <john_arokiasamy@optum.com>; Freeman, Jarred <jarred_freeman@optum.com>; Khot, Rajesh A <rajesh_khot@optum.com>; Dusi, Srihari <srihari.dusi@uhg.com>; Spitzer, Andy <andrew.spitzer@uhg.com>
+Subject: Infastructure Factory Notification [23e9f83e-2fcb-4452-bef5-899a1da0a839] - Environment - Network Setup Required
+
+Manual action is required in order to process the Infrastructure Factory request 23e9f83e-2fcb-4452-bef5-899a1da0a839.
+
+See details below for more information about what is required.
+
+Request ID: 23e9f83e-2fcb-4452-bef5-899a1da0a839
+Request Type: NEW_TENANT
+Requestor: Ash Alam <aalam_ihr@savvysherpa.com>
+
+Workflow ID: df9393ed-b047-4b6c-bc2e-19b73a0d9b8c
+Workflow Name: environment.environment-network-setup
+Tenant: automatedinfratest
+
+Additional Context
+    vrf: AppFactoryHubSpokeNonProd
+    tenant: automatedinfratest
+    environment: dev
+
+Once the necessary steps have been completed related to this workflow step, you may use the following curl operation to continue the execution of the Kickstart request:
+
+curl -XPOST -H "Authorization: Bearer $(gcloud auth print-identity-token)" \ -H "Content-Type: application/json" \ https://if-management-api-i6w3zmpllq-uc.a.run.app/if/management/v1/workflow/df9393ed-b047-4b6c-bc2e-19b73a0d9b8c/complete -d '{
+  "provider": {
+    "name": "<your name here>",
+    "email": "<your email here>"
+  },
+  "metadata": {
+  }
+}'
+
+IMPORTANT: Make sure to set the appropriate name/email values in the posted data.
+You may add any metadata you find useful to be associated with the processing of this operations.  However, that information is optional.
+
+
+curl -XPOST -H "Authorization: Bearer $(gcloud auth print-identity-token)" \ -H "Content-Type: application/json" \ https://if-management-api-i6w3zmpllq-uc.a.run.app/if/management/v1/workflow/df9393ed-b047-4b6c-bc2e-19b73a0d9b8c/complete -d '{
+  "provider": {
+    "name": "Andy Spitzer",
+    "email": "aspitzer1@savvysherpa.com"
+  },
+  "metadata": {
+  }
+}'
